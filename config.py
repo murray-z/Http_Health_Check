@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 
+import requests
+import json
+
+
 config = {
-    "url": "http://localhost:9007",       # http url地址
-    "data": {},                           # 接口输入数据
-    "method": "post",                     # 输入方法 post/get
     "subject": "HEALTH CHECK REPORT",     # 邮件标题
     "from_email": "xxxxxxxxxx@qq.com",    # 发件邮箱
     "mail_host": "smtp.qq.com",           # 服务器，这里以qq为例
@@ -16,3 +17,11 @@ config = {
     "error_num": 5,                       # 预警阈值，即总检查次数超过error_num发送邮件
     "server_name": "my test server"       # 服务名称
 }
+
+
+def get_response_code():
+    """获取接口状态码，需要用户根据自己接口实现，
+       这里仅是一个示例
+    """
+    response = requests.post(url="http://localhost:9007", data=json.dumps({}))
+    return response.status_code

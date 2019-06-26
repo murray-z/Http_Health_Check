@@ -3,12 +3,10 @@
 
 import sys
 import time
-import requests
 import smtplib
-import json
 from email.mime.text import MIMEText
 from email.header import Header
-from config import config
+from config import config, get_response_code
 
 # 邮件参数
 my_sender = config['from_email']
@@ -20,9 +18,6 @@ mail_port = config['mail_port']
 
 
 # http参数
-url = config['url']
-data = config['data']
-method = config['method']
 server_name = config['server_name']
 
 
@@ -43,15 +38,6 @@ def sent_email(email_content):
     server.login(my_sender, my_pass)
     server.sendmail(my_sender, to_email, msg.as_string())
     server.quit()
-
-
-def get_response_code():
-    if method == 'post':
-        response = requests.post(url=url, data=json.dumps(data))
-        return response.status_code
-    if method == 'get':
-        response = requests.get(url=url, data=json.dumps(data))
-        return response.status_code
 
 
 def health_cheak():

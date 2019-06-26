@@ -7,6 +7,11 @@
 - test_http.py   一个简单的http服务 
 
 # 使用
+
+- 配置服务
+    - 在config.py中的config中配置邮件及检查参数
+    - 在config.py中的get_response_code中实现自己调用接口函数
+
 - 启动http服务
 ```python
 python test_http.py
