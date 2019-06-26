@@ -22,8 +22,10 @@ def get_response_code():
     """获得接口返回状态码函数，需要用户根据自己接口自定义，这里是一个简单的示例"""
     try:
         response = requests.post(url="http://localhost:9007", data=json.dumps({'hello': 'world'}))
+        # 若正确，返回200；其他情况用户可以自定义
         return response.status_code
     except :
+        # 若错误，自定义错误码
         return 'error'
     
     
