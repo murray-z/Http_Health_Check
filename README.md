@@ -24,3 +24,4 @@ python http_health_check.py
 
 # 注意事项
 - 采用第三方邮箱发送邮件需要开启SMTP
+- 这里仅以QQ邮箱进行了测试
