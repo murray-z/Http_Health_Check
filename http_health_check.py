@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 
 
+import os
 import sys
 import time
 import smtplib
 from email.mime.text import MIMEText
 from email.header import Header
 from config import config, get_response_code
+
+
+# 监测服务路径
+HC_DIR = os.path.abspath(__file__)
 
 # 邮件参数
 my_sender = config['from_email']
@@ -16,10 +21,8 @@ to_email = config['to_email']
 subject = config['subject']
 mail_port = config['mail_port']
 
-
 # http参数
 server_name = config['server_name']
-
 
 # 检查参数
 check_Intervals = config['check_Intervals']
@@ -46,12 +49,13 @@ def health_cheak():
         error_code_counter = {}
         content = """
          SERVER: {} ERROR !!!
-         
-         SERVER URL:  {}
+
          TOTAL CHECK: {}
          ERROR NUM:   {}
          ERROR CODE:  {}
-    
+         HC DIR:      {}
+         
+
          ^_^  Please confirm as soon as possible ^_^
         """
         for i in range(check_total):
@@ -66,7 +70,7 @@ def health_cheak():
                 counter += 1
 
         if counter >= error_num:
-            sent_email(content.format(server_name, url, check_total, counter, str(error_code_counter)))
+            sent_email(content.format(server_name, check_total, counter, str(error_code_counter), HC_DIR))
             sys.exit()
 
         time.sleep(check_Intervals)

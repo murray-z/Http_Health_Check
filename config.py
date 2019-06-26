@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 import requests
 import json
 
@@ -20,8 +19,9 @@ config = {
 
 
 def get_response_code():
-    """获取接口状态码，需要用户根据自己接口实现，
-       这里仅是一个示例
-    """
-    response = requests.post(url="http://localhost:9007", data=json.dumps({}))
-    return response.status_code
+    """获得接口返回状态码函数，需要用户根据自己接口自定义，这里是一个简单的示例"""
+    try:
+        response = requests.post(url="http://localhost:9007", data=json.dumps({'hello': 'world'}))
+        return response.status_code
+    except :
+        return 'error'
